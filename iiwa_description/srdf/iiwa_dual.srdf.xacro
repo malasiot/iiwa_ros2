@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+
+  <xacro:arg name="name" default="arm"/>
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="description_package" default="iiwa_description" />
+
+  <xacro:property name="description_package" value="$(arg description_package)"/>
+  <xacro:include filename="$(find ${description_package})/srdf/iiwa_dual_macro.srdf.xacro"/>
+
+  <disable_collisions link1="base" link2="camera_pole" reason="Adjacent" />
+  <disable_collisions link1="camera" link2="camera_pole" reason="Adjacent" />
+  
+  <disable_collisions link1="marker_link_0" link2="r_link_7" reason="Adjacent" />
+  <disable_collisions link1="marker_link_0" link2="r_link_6" reason="Adjacent" />
+    
+
+  <xacro:iiwa_srdf name="$(arg name)" prefix="l_" base="base"/>
+  <xacro:iiwa_srdf name="$(arg name)" prefix="r_" base="base"/>
+
+</robot>

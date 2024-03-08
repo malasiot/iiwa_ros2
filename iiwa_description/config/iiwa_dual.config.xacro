@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<!-- Kuka iiwa 7DoF manipulator -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="iiwa">
+
+    <!-- Enable setting arguments from the launch file -->
+    <xacro:arg name="use_sim" default="false" />
+    <xacro:arg name="use_fake_hardware" default="true" />
+    <xacro:arg name="prefix" default="" />
+    <xacro:arg name="robot_ip" default="192.170.10.2" />
+    <xacro:arg name="robot_port" default="30200" />
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+    <xacro:arg name="command_interface" default="position" />
+    <xacro:arg name="base_frame_file" default="base_frame.yaml" />
+    <xacro:arg name="description_package" default="iiwa_description" />
+    <xacro:arg name="runtime_config_package" default="iiwa_description" />
+    <xacro:arg name="controllers_file" default="iiwa_controllers.yaml" />
+    <xacro:arg name="namespace" default="/" />
+
+    <xacro:property name="description_package" value="$(arg description_package)"/>
+
+    <!-- Import iiwa urdf file -->
+    <xacro:include filename="$(find ${description_package})/urdf/iiwa_dual.urdf.xacro" />
+
+    <!-- Import iiwa ros2_control description -->
+    <xacro:include filename="$(find ${description_package})/ros2_control/iiwa.r2c_hardware.xacro" />
+
+    <!-- Import all Gazebo-customization elements -->
+    <xacro:include filename="$(find ${description_package})/gazebo/iiwa.gazebo.xacro"/>
+    
+    <xacro:include filename="$(find ${description_package})/urdf/aruco.urdf.xacro"/>
+
+    <!-- Used for fixing robot -->
+    <link name="world"/>
+    <gazebo reference="world">
+        <static>true</static>
+    </gazebo>
+    
+     <gazebo reference="base">
+        <static>true</static>
+    </gazebo>
+    
+    <gazebo reference="camera_pole">
+        <static>true</static>
+    </gazebo>
+
+    <gazebo reference="camera">
+        <static>true</static>
+    </gazebo>
+
+    <xacro:property name="left_base_frame_file" value="left_$(arg base_frame_file)"/>
+    <xacro:property name="left_base_frame" value="${xacro.load_yaml(left_base_frame_file)['base_frame']}"/>
+    
+    <xacro:property name="right_base_frame_file" value="right_$(arg base_frame_file)"/>
+    <xacro:property name="right_base_frame" value="${xacro.load_yaml(right_base_frame_file)['base_frame']}"/>
+    
+    <material name="gray">
+    <color rgba="0.5 0.5 0.5 1.0"/>
+    </material>
+    
+    <xacro:generic_aruco aruco_dictionary="DICT_4X4_50" aruco_id="1" aruco_l="0.1" aruco_name="marker" white_border="0.01" connected_to="r_link_7">
+        <!-- fake origin not needed! when origin is not specified!-->
+        <origin xyz="0.06 0.0 0.1" rpy="0 1.57 0" />
+    </xacro:generic_aruco>
+
+ <!-- table as base for the 2 iiwa's -->
+    <link name="base">
+        <visual>
+            <origin xyz="-0.5 0 -0.005" rpy="0 0 0" />
+            <geometry>
+                <box size="1.5 1 0.01" />
+            </geometry>
+            <material name="White">
+                <color rgba="1.0 1.0 1.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-0.5 0 -0.005" rpy="0 0 0" />
+            <geometry>
+                <box size="1.5 1 0.01" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="10.0"/>
+            <inertia ixx="0.001" ixy="0.0" ixz="0.001" iyy="0.0" iyz="0.0" izz="0.001"/>
+        </inertial>
+    </link>
+
+    <joint name="base_to_world" type="fixed">
+        <parent link="world"/>
+        <child link="base"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+    <link name="camera_pole">
+        <visual>
+            <origin xyz="0 0 0.6" rpy="0 0 0" />
+            <geometry>
+                <box size="0.025 0.025 1.2" />
+            </geometry>
+            <material name="White">
+                <color rgba="1.0 1.0 1.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.6" rpy="0 0 0" />
+            <geometry>
+                <box size="0.025 0.025 1.2" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="1.0"/>
+            <inertia ixx="0.001" ixy="0.0" ixz="0.001" iyy="0.0" iyz="0.0" izz="0.001"/>
+        </inertial>
+    </link>
+
+    <joint name="camera_pole_to_world" type="fixed">
+        <parent link="base"/>
+        <child link="camera_pole"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+    <link name="camera">
+        <visual>
+            <origin xyz="-0.025 0 1.15" rpy="0 -0.8 0" />
+            <geometry>
+                <box size="0.05 0.1 0.05" />
+            </geometry>
+            <material name="Red">
+                <color rgba="1.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.6" rpy="0 0 0" />
+            <geometry>
+                <box size="0.025 0.025 1.2" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="1.0"/>
+            <inertia ixx="0.001" ixy="0.0" ixz="0.001" iyy="0.0" iyz="0.0" izz="0.001"/>
+        </inertial>
+    </link>
+
+    <joint name="camera_to_pole" type="fixed">
+        <parent link="camera_pole"/>
+        <child link="camera"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+    <xacro:iiwa parent="base" prefix="l_">
+        <origin xyz="${left_base_frame['x']} ${left_base_frame['y']} ${left_base_frame['z']}"
+            rpy="${left_base_frame['roll']} ${left_base_frame['pitch']} ${left_base_frame['yaw']}" />
+    </xacro:iiwa>
+    
+    <xacro:iiwa parent="base" prefix="r_">
+        <origin xyz="${right_base_frame['x']} ${right_base_frame['y']} ${right_base_frame['z']}"
+            rpy="${right_base_frame['roll']} ${right_base_frame['pitch']} ${right_base_frame['yaw']}" />
+    </xacro:iiwa>
+
+    <xacro:iiwa_r2c_hardware
+        name="iiwa_left" prefix="l_"
+        robot_ip="$(arg robot_ip)" robot_port="$(arg robot_port)"
+        command_interface="$(arg command_interface)"
+        initial_positions_file="$(arg initial_positions_file)"
+        use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)"
+        />
+        
+    <xacro:iiwa_r2c_hardware
+        name="iiwa_right" prefix="r_"
+        robot_ip="$(arg robot_ip)" robot_port="$(arg robot_port)"
+        command_interface="$(arg command_interface)"
+        initial_positions_file="$(arg initial_positions_file)"
+        use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)"
+        />
+
+
+    <xacro:iiwa_gazebo
+        runtime_config_package="$(arg runtime_config_package)"
+        controllers_file="$(arg controllers_file)"
+        namespace="$(arg namespace)"
+        prefix=""
+        />
+
+</robot>

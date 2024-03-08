@@ -80,10 +80,11 @@ For further instructions concerning the installation and setup of FRI, please re
 **NOTE:** All security modes (T1, T2, AUTO) are supported.
 
 ### On ROS2 side:
-The `iiwa_bringup` package contains 3 main launch files: 2 examples and the main driver launcher
+The `iiwa_bringup` package contains 4 main launch files: 2 examples and the main driver launcher
 - `joy_servo_teleop.launch.py` - launches a fake robot controlled by a joystick using `moveit_servo`
 - `iiwa_pose_tracking.launch.py` - launches a fake robot tracking a pose pusblished in topic `\target_pose` using pose tracking capabilities of`moveit_servo`
 - `iiwa.launch.py` - is the main launcher giving access to all feaures of the driver.
+- `iiwa_dual.launch.py` - This is an extension of iiwa.launch.py to bring up a dual arm robot. Gazebo is not working for this.
 
 The arguments for launch files can be listed using
 ```shell

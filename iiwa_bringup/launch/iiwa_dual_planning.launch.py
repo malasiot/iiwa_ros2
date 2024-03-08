@@ -127,7 +127,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(description_package), "srdf", srdf]
+                [FindPackageShare(description_package), "srdf", "iiwa_dual.srdf.xacro"]
             ),
             " ",
             "name:=",
@@ -147,7 +147,7 @@ def generate_launch_description():
 
     # Get planning parameters
     robot_description_planning_joint_limits = PathJoinSubstitution([
-            FindPackageShare(description_package), "moveit2", "iiwa_joint_limits.yaml",
+            FindPackageShare(description_package), "moveit2", "iiwa_dual_joint_limits.yaml",
         ]
     )
 
@@ -162,22 +162,22 @@ def generate_launch_description():
     }
 
     robot_description_kinematics = PathJoinSubstitution(
-        [FindPackageShare(description_package), "moveit2", "kinematics.yaml"]
+        [FindPackageShare(description_package), "moveit2", "dual_kinematics.yaml"]
     )
 
     planning_pipelines_config = PathJoinSubstitution([
-            FindPackageShare(description_package), "moveit2", "planning_pipelines_config.yaml",
+            FindPackageShare(description_package), "moveit2", "dual_planning_pipelines_config.yaml",
         ]
     )
 
     ompl_planning_config = PathJoinSubstitution([
-            FindPackageShare(description_package), "moveit2", "ompl_planning.yaml",
+            FindPackageShare(description_package), "moveit2", "dual_ompl_planning.yaml",
         ]
     )
 
     moveit_controllers = PathJoinSubstitution(
         [FindPackageShare(description_package),
-            "moveit2", "iiwa_moveit_controller_config.yaml"]
+            "moveit2", "iiwa_dual_moveit_controller_config.yaml"]
     )
 
     trajectory_execution = {

@@ -192,6 +192,8 @@ def generate_launch_description():
         "publish_geometry_updates": True,
         "publish_state_updates": True,
         "publish_transforms_updates": True,
+        "publish_robot_description":True, 
+ 	"publish_robot_description_semantic":True
     }
 
     move_group_node = Node(
@@ -211,7 +213,7 @@ def generate_launch_description():
             moveit_controllers,
             planning_scene_monitor_parameters,
             move_group_capabilities,
-            {"use_sim_time": use_sim},
+            {"use_sim_time": True},
         ],
     )
 

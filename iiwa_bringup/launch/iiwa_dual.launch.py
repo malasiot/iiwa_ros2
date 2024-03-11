@@ -282,7 +282,8 @@ def generate_launch_description():
         executable='robot_state_publisher',
         namespace=namespace,
         output='both',
-        parameters=[robot_description],
+        parameters=[robot_description,
+        {"use_sim_time": True}],
     )
     rviz_node = Node(
         package='rviz2',

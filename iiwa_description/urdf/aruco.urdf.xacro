@@ -32,6 +32,9 @@
         <geometry>
           <box size="${aruco_l + 2*white_border * aruco_l} ${aruco_l + 2*white_border * aruco_l} ${0.01 * aruco_l/0.09}"/>
         </geometry>
+         <material name="white">
+	    <color rgba="1 1 1 1"/>
+	  </material>
       </visual>
       <visual>
         <origin rpy="0.0 0 0" xyz="0 0 0"/>

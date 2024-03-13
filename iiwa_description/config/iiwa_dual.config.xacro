@@ -59,7 +59,7 @@
     
     <xacro:generic_aruco aruco_dictionary="DICT_4X4_50" aruco_id="1" aruco_l="0.1" aruco_name="marker" white_border="0.1" connected_to="r_link_7">
         <!-- fake origin not needed! when origin is not specified!-->
-        <origin xyz="0.06 0.0 0.1" rpy="0 1.57 0" />
+        <origin xyz="0.06 0.0 0.15" rpy="0 1.57 0" />
     </xacro:generic_aruco>
 
  <!-- table as base for the 2 iiwa's -->

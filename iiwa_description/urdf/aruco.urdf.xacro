@@ -40,7 +40,7 @@
         <origin rpy="0.0 0 0" xyz="0 0 0"/>
         <geometry>
           <!-- <box size="0.09 0.09 0.01"/> -->
-          <mesh filename="package://iiwa_description/meshes/aruco/${aruco_dictionary}/${aruco_dictionary}_id${aruco_id}.dae" scale="${aruco_l/0.09} ${aruco_l/0.09} ${aruco_l/0.09}"/>
+          <mesh filename="package://iiwa_description/meshes/aruco/aruco.dae" scale="${aruco_l/0.09} ${aruco_l/0.09} ${aruco_l/0.09}"/>
         </geometry>
       </visual>
     </link>

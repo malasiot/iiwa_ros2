@@ -13,7 +13,7 @@
     <xacro:arg name="base_frame_file" default="base_frame.yaml" />
     <xacro:arg name="description_package" default="iiwa_description" />
     <xacro:arg name="runtime_config_package" default="iiwa_description" />
-    <xacro:arg name="controllers_file" default="iiwa_controllers.yaml" />
+    <xacro:arg name="controllers_file" default="iiwa_dual_controllers.yaml" />
     <xacro:arg name="namespace" default="/" />
 
     <xacro:property name="description_package" value="$(arg description_package)"/>
@@ -91,7 +91,7 @@
         <child link="base"/>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
     </joint>
-    
+    <!--
     <link name="camera_pole">
         <visual>
             <origin xyz="0 0 0.6" rpy="0 0 0" />
@@ -156,7 +156,7 @@
       
        <origin xyz="-0.025 0 0" rpy="-1.57 0 1.57" />
     </joint>
-    
+    -->
     <xacro:iiwa parent="base" prefix="l_">
         <origin xyz="${left_base_frame['x']} ${left_base_frame['y']} ${left_base_frame['z']}"
             rpy="${left_base_frame['roll']} ${left_base_frame['pitch']} ${left_base_frame['yaw']}" />
@@ -186,9 +186,16 @@
 
     <xacro:iiwa_gazebo
         runtime_config_package="$(arg runtime_config_package)"
-        controllers_file="$(arg controllers_file)"
+        controllers_file="iiwa_controllers.yaml"
         namespace="$(arg namespace)"
-        prefix=""
+        prefix="l_"
+        />
+        
+        <xacro:iiwa_gazebo
+        runtime_config_package="$(arg runtime_config_package)"
+        controllers_file="iiwa_controllers.yaml"
+        namespace="$(arg namespace)"
+        prefix="r_"
         />
 
 </robot>

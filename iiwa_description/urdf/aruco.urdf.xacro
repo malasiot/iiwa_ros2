@@ -24,13 +24,13 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="${aruco_l + 2*white_border * aruco_l} ${aruco_l + 2*white_border * aruco_l} ${0.01 * aruco_l/0.09}"/>
+          <box size="${aruco_l} ${aruco_l} ${0.01 * aruco_l/0.09}"/>
         </geometry>
       </collision>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="${aruco_l + 2*white_border * aruco_l} ${aruco_l + 2*white_border * aruco_l} ${0.01 * aruco_l/0.09}"/>
+          <box size="${aruco_l} ${aruco_l} ${0.01 * aruco_l/0.09}"/>
         </geometry>
          <material name="white">
 	    <color rgba="1 1 1 1"/>
@@ -44,6 +44,15 @@
         </geometry>
       </visual>
     </link>
+    
+    <link name="${aruco_name}_link_origin" />
+    
+    <joint name="${aruco_name}_joint_origin_link0" type="fixed">
+    <parent link = "${aruco_name}_link_0"/>
+    <child link= "${aruco_name}_link_origin" />
+    <origin xyz="${aruco_l/2 - white_border} ${aruco_l/2 - white_border} ${0.005 * aruco_l/0.09}" rpy="0 0 3.14"/>
+    </joint>
+    
 
     <gazebo reference="${aruco_name}_link_0">
       <kp>100000.0</kp>

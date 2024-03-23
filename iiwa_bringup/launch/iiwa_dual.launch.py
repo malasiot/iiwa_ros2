@@ -90,7 +90,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             'use_planning',
-            default_value='false',
+            default_value='true',
             description='Start robot with Moveit2 `move_group` planning \
                          config for Pilz and OMPL.',
         )
@@ -151,6 +151,13 @@ def generate_launch_description():
             description='Configuration file of robot base frame wrt World.',
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'show_aruco_board',
+            default_value='false',
+            description='Augment model with aruco board on the right arm end-effector.',
+        )
+    )
 
     # Initialize Arguments
     runtime_config_package = LaunchConfiguration('runtime_config_package')
@@ -170,6 +177,7 @@ def generate_launch_description():
     command_interface = LaunchConfiguration('command_interface')
     base_frame_file = LaunchConfiguration('base_frame_file')
     namespace = LaunchConfiguration('namespace')
+    show_aruco_board = LaunchConfiguration("show_aruco_board")
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -212,6 +220,9 @@ def generate_launch_description():
             ' ',
             'controllers_file:=',
             controllers_file,
+             ' ',
+            'show_aruco_board:=',
+            show_aruco_board,
             ' ',
             'namespace:=',
             namespace,
@@ -234,6 +245,7 @@ def generate_launch_description():
             'start_rviz': start_rviz,
             'base_frame_file': base_frame_file,
             'namespace': namespace,
+            'show_aruco_board': show_aruco_board,
             'use_sim': use_sim
            
         }.items(),

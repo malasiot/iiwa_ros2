@@ -14,9 +14,11 @@
     <xacro:arg name="description_package" default="iiwa_description" />
     <xacro:arg name="runtime_config_package" default="iiwa_description" />
     <xacro:arg name="controllers_file" default="iiwa_dual_controllers.yaml" />
+    <xacro:arg name="show_aruco_board" default="false" />
     <xacro:arg name="namespace" default="/" />
 
     <xacro:property name="description_package" value="$(arg description_package)"/>
+    <xacro:property name="show_aruco_board" value="$(arg show_aruco_board)"/>
 
     <!-- Import iiwa urdf file -->
     <xacro:include filename="$(find ${description_package})/urdf/iiwa_dual.urdf.xacro" />
@@ -27,7 +29,9 @@
     <!-- Import all Gazebo-customization elements -->
     <xacro:include filename="$(find ${description_package})/gazebo/iiwa.gazebo.xacro"/>
     
-    <xacro:include filename="$(find ${description_package})/urdf/aruco.urdf.xacro"/>
+    <xacro:if value="${show_aruco_board}">
+    	<xacro:include filename="$(find ${description_package})/urdf/aruco.urdf.xacro"/>
+    </xacro:if>
 
     <!-- Used for fixing robot -->
     <link name="world"/>
@@ -56,11 +60,12 @@
     <material name="gray">
     <color rgba="0.5 0.5 0.5 1.0"/>
     </material>
-    
-    <xacro:generic_aruco aruco_dictionary="DICT_4X4_50" aruco_id="1" aruco_l="0.2" aruco_name="marker" white_border="${50 * 0.2/700}" connected_to="r_tool0">
+    <xacro:if value="${show_aruco_board}">
+    	<xacro:generic_aruco aruco_dictionary="DICT_4X4_50" aruco_id="1" aruco_l="0.2" aruco_name="marker" white_border="${50 * 0.2/700}" connected_to="r_tool0">
         <!-- fake origin not needed! when origin is not specified!-->
-        <origin xyz="0 0.0 0.1" rpy="0 1.57 0" />
-    </xacro:generic_aruco>
+       	 <origin xyz="0 0.0 0.1" rpy="0 1.57 0" />
+    	</xacro:generic_aruco>
+   </xacro:if>
 
  <!-- table as base for the 2 iiwa's -->
     <link name="base">

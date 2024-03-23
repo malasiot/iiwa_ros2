@@ -85,6 +85,13 @@ def generate_launch_description():
             description='Start robot in Gazebo simulation.',
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'show_aruco_board',
+            default_value='false',
+            description='Show ARUCO board.',
+        )
+    )
 
     # Initialize Arguments
     description_package = LaunchConfiguration('description_package')
@@ -95,6 +102,7 @@ def generate_launch_description():
     base_frame_file = LaunchConfiguration('base_frame_file')
     namespace = LaunchConfiguration('namespace')
     use_sim = LaunchConfiguration('use_sim')
+    show_aruco_board = LaunchConfiguration('show_aruco_board')
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -113,6 +121,9 @@ def generate_launch_description():
             ' ',
             'description_package:=',
             description_package,
+            ' ',
+            'show_aruco_board:=',
+            show_aruco_board,
             ' ',
             'namespace:=',
             namespace,
@@ -136,6 +147,9 @@ def generate_launch_description():
             "prefix:=",
             prefix,
             " ",
+            'show_aruco_board:=',
+            show_aruco_board,
+            ' ',
             'description_package:=',
             description_package,
         ]

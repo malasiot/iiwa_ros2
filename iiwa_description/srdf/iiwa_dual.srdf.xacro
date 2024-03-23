@@ -4,15 +4,20 @@
   <xacro:arg name="name" default="arm"/>
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="description_package" default="iiwa_description" />
+  <xacro:arg name="show_aruco_board" default="false" />
 
   <xacro:property name="description_package" value="$(arg description_package)"/>
+   <xacro:property name="show_aruco_board" value="$(arg show_aruco_board)"/>
+   
   <xacro:include filename="$(find ${description_package})/srdf/iiwa_dual_macro.srdf.xacro"/>
 
   <disable_collisions link1="base" link2="camera_pole" reason="Adjacent" />
   <disable_collisions link1="camera" link2="camera_pole" reason="Adjacent" />
   
+  <xacro:if value="${show_aruco_board}">
   <disable_collisions link1="marker_link_0" link2="r_link_7" reason="Adjacent" />
   <disable_collisions link1="marker_link_0" link2="r_link_6" reason="Adjacent" />
+ 
     
   <group_state name="calibration" group="r_iiwa_arm">
         <joint name="r_joint_a1" value="-0.08010961654547082"/>
@@ -23,7 +28,7 @@
         <joint name="r_joint_a6" value="1.2045682076607263"/>
         <joint name="r_joint_a7" value="-0.11062877843161172"/>
  </group_state>
-    
+  </xacro:if>
 
   <xacro:iiwa_srdf name="$(arg name)" prefix="l_" base="base"/>
   <xacro:iiwa_srdf name="$(arg name)" prefix="r_" base="base"/>

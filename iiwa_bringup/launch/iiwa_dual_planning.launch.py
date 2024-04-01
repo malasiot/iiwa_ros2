@@ -18,8 +18,18 @@ from launch.conditions import IfCondition
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from launch_param_builder import ParameterBuilder, load_yaml, load_xacro
+import os
+from ament_index_python.packages import get_package_share_directory
+from launch_param_builder import ParameterBuilder
 
-
+def _octomap_launch_params(params: ParameterBuilder):
+    params.yaml("moveit2/sensors_virtual_pointcloud.yaml")
+    params.parameter("octomap_frame", "camera_optical_frame_world")
+    params.parameter("octomap_resolution", 0.05)
+    params.parameter("max_range", 5.0)
+    return params.to_dict()
+    
 def generate_launch_description():
     # Declare arguments
     declared_arguments = []
@@ -204,12 +214,17 @@ def generate_launch_description():
     planning_scene_monitor_parameters = {
         "publish_planning_scene": True,
         "publish_geometry_updates": True,
+        "publish_monitored_planning_scene": True,
         "publish_state_updates": True,
         "publish_transforms_updates": True,
         "publish_robot_description":True, 
  	"publish_robot_description_semantic":True
     }
 
+   
+    params_movegroup = ParameterBuilder('iiwa_description')
+   
+   
     move_group_node = Node(
         package="moveit_ros_move_group",
         executable="move_group",
@@ -228,7 +243,7 @@ def generate_launch_description():
             planning_scene_monitor_parameters,
             move_group_capabilities,
             {"use_sim_time": True},
-        ],
+        ] + [_octomap_launch_params(params_movegroup)],
     )
 
     rviz_config_file = PathJoinSubstitution(

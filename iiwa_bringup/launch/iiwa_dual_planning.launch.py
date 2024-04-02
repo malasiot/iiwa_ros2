@@ -244,7 +244,7 @@ def generate_launch_description():
             move_group_capabilities,
             {"use_sim_time": True},
           ] + [_octomap_launch_params(params_movegroup)],
-        arguments=['--ros-args', '--log-level', 'debug', "--log-level",  "rcl:=INFO"]
+  #      arguments=['--ros-args', '--log-level', 'debug', "--log-level",  "rcl:=INFO"]
     )
 
     rviz_config_file = PathJoinSubstitution(

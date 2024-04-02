@@ -25,7 +25,7 @@ from launch_param_builder import ParameterBuilder
 
 def _octomap_launch_params(params: ParameterBuilder):
     params.yaml("moveit2/sensors_virtual_pointcloud.yaml")
-    params.parameter("octomap_frame", "camera_optical_frame_world")
+#    params.parameter("octomap_frame", "world")
     params.parameter("octomap_resolution", 0.05)
     params.parameter("max_range", 5.0)
     return params.to_dict()
@@ -243,7 +243,8 @@ def generate_launch_description():
             planning_scene_monitor_parameters,
             move_group_capabilities,
             {"use_sim_time": True},
-        ] + [_octomap_launch_params(params_movegroup)],
+          ] + [_octomap_launch_params(params_movegroup)],
+        arguments=['--ros-args', '--log-level', 'debug', "--log-level",  "rcl:=INFO"]
     )
 
     rviz_config_file = PathJoinSubstitution(

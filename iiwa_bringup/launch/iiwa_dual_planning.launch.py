@@ -218,7 +218,7 @@ def generate_launch_description():
         "publish_state_updates": True,
         "publish_transforms_updates": True,
         "publish_robot_description":True, 
- 	"publish_robot_description_semantic":True
+ 	    "publish_robot_description_semantic":True
     }
 
    
@@ -243,7 +243,8 @@ def generate_launch_description():
             planning_scene_monitor_parameters,
             move_group_capabilities,
             {"use_sim_time": True},
-          ] + [_octomap_launch_params(params_movegroup)],
+          ] 
+        #+ [_octomap_launch_params(params_movegroup)],
   #      arguments=['--ros-args', '--log-level', 'debug', "--log-level",  "rcl:=INFO"]
     )
 

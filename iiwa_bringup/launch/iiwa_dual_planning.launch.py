@@ -241,8 +241,7 @@ def generate_launch_description():
             trajectory_execution,
             moveit_controllers,
             planning_scene_monitor_parameters,
-            move_group_capabilities,
-            {"use_sim_time": True},
+            move_group_capabilities
           ] 
         #+ [_octomap_launch_params(params_movegroup)],
   #      arguments=['--ros-args', '--log-level', 'debug', "--log-level",  "rcl:=INFO"]

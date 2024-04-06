@@ -15,8 +15,6 @@
         <joint name="${prefix}joint_a7" value="0.785"/>
     </group_state>
     
-    <end_effector name="${prefix}ee" parent_link="${prefix}tool0" group="${prefix}${name}_arm"/>
-   
     <disable_collisions link1="${base}" link2="${prefix}link_0" reason="Adjacent" />
     <disable_collisions link1="${base}" link2="${prefix}link_1" reason="Never" />
     <disable_collisions link1="${base}" link2="${prefix}link_2" reason="Never" />

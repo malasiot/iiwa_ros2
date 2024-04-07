@@ -158,6 +158,13 @@ def generate_launch_description():
             description='Augment model with aruco board on the right arm end-effector.',
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'add_gripper_links',
+            default_value='true',
+            description='Add end-effector for each robot',
+        )
+    )
 
     # Initialize Arguments
     runtime_config_package = LaunchConfiguration('runtime_config_package')
@@ -178,6 +185,8 @@ def generate_launch_description():
     base_frame_file = LaunchConfiguration('base_frame_file')
     namespace = LaunchConfiguration('namespace')
     show_aruco_board = LaunchConfiguration("show_aruco_board")
+    add_gripper_links = LaunchConfiguration("add_gripper_links")
+
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -223,6 +232,9 @@ def generate_launch_description():
              ' ',
             'show_aruco_board:=',
             show_aruco_board,
+            ' ',
+             'add_gripper_links:=',
+            add_gripper_links,
             ' ',
             'namespace:=',
             namespace,

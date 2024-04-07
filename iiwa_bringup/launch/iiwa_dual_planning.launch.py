@@ -25,8 +25,8 @@ from launch_param_builder import ParameterBuilder
 
 def _octomap_launch_params(params: ParameterBuilder):
     params.yaml("moveit2/sensors_virtual_pointcloud.yaml")
-#    params.parameter("octomap_frame", "world")
-    params.parameter("octomap_resolution", 0.05)
+    params.parameter("octomap_frame", "world")
+    params.parameter("octomap_resolution", 0.02)
     params.parameter("max_range", 5.0)
     return params.to_dict()
     
@@ -103,6 +103,14 @@ def generate_launch_description():
         )
     )
 
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'add_gripper_links',
+            default_value='true',
+            description='Add end-effector for each robot',
+        )
+    )
+
     # Initialize Arguments
     description_package = LaunchConfiguration('description_package')
     description_file = LaunchConfiguration('description_file')
@@ -113,6 +121,8 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     use_sim = LaunchConfiguration('use_sim')
     show_aruco_board = LaunchConfiguration('show_aruco_board')
+    add_gripper_links = LaunchConfiguration('add_gripper_links')
+
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -134,6 +144,9 @@ def generate_launch_description():
             ' ',
             'show_aruco_board:=',
             show_aruco_board,
+            ' ',
+            'add_gripper_links:=',
+            add_gripper_links,
             ' ',
             'namespace:=',
             namespace,
@@ -243,8 +256,8 @@ def generate_launch_description():
             planning_scene_monitor_parameters,
             move_group_capabilities
           ] 
-        #+ [_octomap_launch_params(params_movegroup)],
-  #      arguments=['--ros-args', '--log-level', 'debug', "--log-level",  "rcl:=INFO"]
+        + [_octomap_launch_params(params_movegroup)],
+    #    arguments=['--ros-args', '--log-level', 'debug', "--log-level",  "rcl:=INFO"]
     )
 
     rviz_config_file = PathJoinSubstitution(

@@ -15,10 +15,12 @@
     <xacro:arg name="runtime_config_package" default="iiwa_description" />
     <xacro:arg name="controllers_file" default="iiwa_dual_controllers.yaml" />
     <xacro:arg name="show_aruco_board" default="false" />
+    <xacro:arg name="add_gripper_links" default="true" />
     <xacro:arg name="namespace" default="/" />
 
     <xacro:property name="description_package" value="$(arg description_package)"/>
     <xacro:property name="show_aruco_board" value="$(arg show_aruco_board)"/>
+    <xacro:property name="add_gripper_links" value="$(arg add_gripper_links)"/>
 
     <!-- Import iiwa urdf file -->
     <xacro:include filename="$(find ${description_package})/urdf/iiwa_dual.urdf.xacro" />
@@ -162,12 +164,12 @@
        <origin xyz="-0.025 0 0" rpy="-1.57 0 1.57" />
     </joint>
 
-    <xacro:iiwa parent="base" prefix="l_">
+    <xacro:iiwa parent="base" prefix="l_" add_gripper_link="${add_gripper_links}">
         <origin xyz="${left_base_frame['x']} ${left_base_frame['y']} ${left_base_frame['z']}"
             rpy="${left_base_frame['roll']} ${left_base_frame['pitch']} ${left_base_frame['yaw']}" />
     </xacro:iiwa>
     
-    <xacro:iiwa parent="base" prefix="r_">
+    <xacro:iiwa parent="base" prefix="r_" add_gripper_link="${add_gripper_links}">
         <origin xyz="${right_base_frame['x']} ${right_base_frame['y']} ${right_base_frame['z']}"
             rpy="${right_base_frame['roll']} ${right_base_frame['pitch']} ${right_base_frame['yaw']}" />
     </xacro:iiwa>

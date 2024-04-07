@@ -17,9 +17,16 @@
     <xacro:arg name="namespace" default="/" />
 
     <xacro:property name="description_package" value="$(arg description_package)"/>
-
+  
     <!-- Import iiwa urdf file -->
     <xacro:include filename="$(find ${description_package})/urdf/iiwa.urdf.xacro" />
+
+    <xacro:if value="${show_aruco_board}">
+    	<xacro:generic_aruco aruco_dictionary="DICT_4X4_50" aruco_id="1" aruco_l="0.2" aruco_name="marker" white_border="${50 * 0.2/700}" connected_to="r_tool0">
+        <!-- fake origin not needed! when origin is not specified!-->
+       	 <origin xyz="0 0.0 0.1" rpy="0 1.57 0" />
+    	</xacro:generic_aruco>
+   </xacro:if>
 
     <!-- Import iiwa ros2_control description -->
     <xacro:include filename="$(find ${description_package})/ros2_control/iiwa.r2c_hardware.xacro" />

@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="iiwa" params="parent prefix *origin">
+  <xacro:macro name="iiwa" params="parent prefix add_gripper_link *origin">
 
+<xacro:property name="gripper_length" value="0.15" />
+<xacro:property name="gripper_width" value="0.1" />
+<xacro:property name="gripper_depth" value="0.01" />
   
   <link name="${prefix}iiwa_base" type="fixed"/>
 
@@ -228,6 +231,48 @@
       <child link="${prefix}tool0"/>
       <axis xyz="0 0 0"/>
   </joint>
+
+   <xacro:if value="${add_gripper_link}">
+        <link name="${prefix}gripper">
+            <visual>
+                <origin xyz="0 0 ${gripper_length/2}" rpy="0 0 0" />
+                <geometry>
+                    <box size="${gripper_width} ${gripper_depth} ${gripper_length}" />
+                </geometry>
+                <material name="White">
+                    <color rgba="1.0 1.0 1.0 1.0" />
+                </material>
+            </visual>
+            <collision>
+                 <origin xyz="0 0 ${gripper_length/2}" rpy="0 0 0" />
+                <geometry>
+                    <box size="${gripper_width} ${gripper_depth} ${gripper_length}" />
+                </geometry>
+            </collision>
+            <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="10.0"/>
+            <inertia ixx="0.001" ixy="0.0" ixz="0.001" iyy="0.0" iyz="0.0" izz="0.001"/>
+            </inertial>
+    	 </link>
+     
+        <joint name="${prefix}joint_tool0_gripper" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <parent link="${prefix}tool0"/>
+             <child link="${prefix}gripper"/>
+             <axis xyz="0 0 0"/>
+         </joint>
+
+         <link name="${prefix}ee"/>
+
+          <joint name="${prefix}joint_gripper_ee" type="fixed">
+            <origin xyz="0 0 ${gripper_length}" rpy="0 0 0"/>
+            <parent link="${prefix}gripper"/>
+             <child link="${prefix}ee"/>
+             <axis xyz="0 0 0"/>
+         </joint>
+
+   </xacro:if>
 
   </xacro:macro>
 </robot>

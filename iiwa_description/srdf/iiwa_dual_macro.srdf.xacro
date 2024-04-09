@@ -14,6 +14,16 @@
         <joint name="${prefix}joint_a6" value="1.571"/>
         <joint name="${prefix}joint_a7" value="0.785"/>
     </group_state>
+
+     <group_state name="upright" group="${prefix}${name}_arm">
+        <joint name="${prefix}joint_a1" value="0"/>
+        <joint name="${prefix}joint_a2" value="0"/>
+        <joint name="${prefix}joint_a3" value="0"/>
+        <joint name="${prefix}joint_a4" value="0"/>
+        <joint name="${prefix}joint_a5" value="0"/>
+        <joint name="${prefix}joint_a6" value="0"/>
+        <joint name="${prefix}joint_a7" value="0"/>
+    </group_state>
     
     <disable_collisions link1="${base}" link2="${prefix}link_0" reason="Adjacent" />
     <disable_collisions link1="${base}" link2="${prefix}link_1" reason="Never" />

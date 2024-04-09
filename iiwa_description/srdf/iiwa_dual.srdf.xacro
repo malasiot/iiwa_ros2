@@ -33,4 +33,10 @@
   <xacro:iiwa_srdf name="$(arg name)" prefix="l_" base="base"/>
   <xacro:iiwa_srdf name="$(arg name)" prefix="r_" base="base"/>
 
+  <group name="dual_arm">
+    <group name="l_iiwa_arm_ee" />
+    <group name="r_iiwa_arm_ee" />
+  </group>
+
+
 </robot>

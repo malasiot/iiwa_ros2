@@ -131,10 +131,9 @@
     </joint>
     
     <xacro:sensor_d435 parent="camera_pole" >
-        
-        <origin xyz="-0.025 0 1.15" rpy="0 0.8 3.14"/>
+        <origin xyz="-0.025 0.01 1.15" rpy="0 0.8 3.14"/>
     </xacro:sensor_d435>
-
+<!--
     <link name="camera">
         <visual>
             <geometry>
@@ -171,7 +170,7 @@
       
        <origin xyz="-0.025 0 0" rpy="-1.57 0 1.57" />
     </joint>
-
+-->
     <xacro:iiwa parent="base" prefix="l_" add_gripper_link="${add_gripper_links}">
         <origin xyz="${left_base_frame['x']} ${left_base_frame['y']} ${left_base_frame['z']}"
             rpy="${left_base_frame['roll']} ${left_base_frame['pitch']} ${left_base_frame['yaw']}" />

@@ -35,6 +35,8 @@
     	<xacro:include filename="$(find ${description_package})/urdf/aruco.urdf.xacro"/>
     </xacro:if>
 
+    <xacro:include filename="$(find ${description_package})/urdf/d435.urdf.xacro"/>
+
     <!-- Used for fixing robot -->
     <link name="world"/>
     <gazebo reference="world">
@@ -128,6 +130,11 @@
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
     </joint>
     
+    <xacro:sensor_d435 parent="camera_pole" >
+        
+        <origin xyz="-0.025 0 1.15" rpy="0 0.8 3.14"/>
+    </xacro:sensor_d435>
+
     <link name="camera">
         <visual>
             <geometry>
@@ -148,6 +155,7 @@
             <inertia ixx="0.001" ixy="0.0" ixz="0.001" iyy="0.0" iyz="0.0" izz="0.001"/>
         </inertial>
     </link>
+
 
     <joint name="camera_to_pole" type="fixed">
         <parent link="camera_pole"/>

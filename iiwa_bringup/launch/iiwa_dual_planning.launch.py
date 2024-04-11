@@ -175,9 +175,6 @@ def generate_launch_description():
             ' ',
             'description_package:=',
             description_package,
-            ' ',
-            'namespace:=',
-            namespace
         ]
     )
 

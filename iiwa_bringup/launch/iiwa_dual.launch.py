@@ -309,6 +309,7 @@ def generate_launch_description():
         parameters=[robot_description,
         {"use_sim_time": True}],
     )
+
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',

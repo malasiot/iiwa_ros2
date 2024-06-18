@@ -174,7 +174,59 @@
         <inertia ixx="0.01"  ixy="0"  ixz="0" iyy="0.01" iyz="0" izz="0.01" />
       </inertial>
   </link>
+
+   <link name="${prefix}ft_sensor_link">
+    <visual>
+      <origin rpy="3.14159 0.0 0.0" xyz="-0.037 0.037 0.017"/>
+        <geometry>
+        <mesh filename="package://iiwa_description/meshes/ati/ati_gamma.stl" scale="1.0 1.0 1.0"/>
+        </geometry>
+      
+       <material name="Grey">
+                    <color rgba="0.5 0.5 0.5 1.0" />
+                </material>
+    </visual>
+    <!--
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.017"/>
+      <geometry>
+        <mesh filename="package://iiwa_description/meshes/ati/ati_gamma.stl" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </collision>
+    -->
+    <inertial>
+      <mass value="0.1"/>
+      <origin rpy="0 0 0" xyz="0 0 0.017"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+
+  <link name="${prefix}plate_link">
+	  <collision>
+		  <geometry>
+		    <mesh filename="package://iiwa_description/meshes/plates/gamma_plate_gripper.stl" scale="0.001 0.001 0.001"/>
+		  </geometry> 
+		  <origin rpy="0 0 0.0" xyz="-0.035 -0.05 0.0"/>
+	</collision>
+	<visual>
+		<geometry>
+			<mesh filename="package://iiwa_description/meshes/plates/gamma_plate_gripper.stl" scale="0.001 0.001 0.001"/>
+		</geometry>
+		  <origin rpy="0 0 0" xyz="-0.035 -0.05 0.0"/>
+		  <material name="lc_soft_enable_wide_grip_Base_SWA.stl">
+			  <color rgba="0.4891 0.5125 0.5281 1.0"/>
+		  </material>
+	</visual>
+
+  <inertial>
+          <inertia ixx="0.0024968641" ixy="0.0" ixz="0.0" iyy="0.0022605853" iyz="0.0" izz="0.0011041847"/>
+          <origin rpy="0 0 0" xyz="0.0 0.0 0.02"/>
+          <mass value="0.6"/>
+  </inertial>
+  </link>
+
   <link name="${prefix}tool0"/>
+  <link name="${prefix}tool1"/>
 
   <joint name="${prefix}joint_a1" type="revolute">
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -225,54 +277,30 @@
       <axis xyz="0 0 1"/>
       <limit effort="40" lower="-3.0541" upper="3.0541" velocity="2.356"/>
   </joint>
+
+  
+
   <joint name="${prefix}joint_a7-tool0" type="fixed">
-      <origin rpy="0 0 0" xyz="0 0 0.154"/>
+      <origin rpy="0 0 0" xyz="0 0 0.152"/>
       <parent link="${prefix}link_7"/>
       <child link="${prefix}tool0"/>
       <axis xyz="0 0 0"/>
   </joint>
 
-   <xacro:if value="${add_gripper_link}">
-        <link name="${prefix}gripper">
-            <visual>
-                <origin xyz="0 0 ${gripper_length/2}" rpy="0 0 0" />
-                <geometry>
-                    <box size="${gripper_width} ${gripper_depth} ${gripper_length}" />
-                </geometry>
-                <material name="White">
-                    <color rgba="1.0 1.0 1.0 1.0" />
-                </material>
-            </visual>
-            <collision>
-                 <origin xyz="0 0 ${gripper_length/2}" rpy="0 0 0" />
-                <geometry>
-                    <box size="${gripper_width} ${gripper_depth} ${gripper_length}" />
-                </geometry>
-            </collision>
-            <inertial>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <mass value="10.0"/>
-            <inertia ixx="0.001" ixy="0.0" ixz="0.001" iyy="0.0" iyz="0.0" izz="0.001"/>
-            </inertial>
-    	 </link>
-     
-        <joint name="${prefix}joint_tool0_gripper" type="fixed">
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <parent link="${prefix}tool0"/>
-             <child link="${prefix}gripper"/>
-             <axis xyz="0 0 0"/>
-         </joint>
 
-         <link name="${prefix}ee"/>
+  <joint name="${prefix}ft_joint" type="fixed">
+    <origin rpy="0.0 0.0 0" xyz="0.00 0.0 ${0.017}"/>
+    <axis xyz="0 0 1"/>
+    <parent link="${prefix}tool0"/>
+    <child link="${prefix}ft_sensor_link"/>
+  </joint>
 
-          <joint name="${prefix}joint_gripper_ee" type="fixed">
-            <origin xyz="0 0 ${gripper_length}" rpy="0 0 0"/>
-            <parent link="${prefix}gripper"/>
-             <child link="${prefix}ee"/>
-             <axis xyz="0 0 0"/>
-         </joint>
-
-   </xacro:if>
+  <joint name="${prefix}ft_joint-tool1" type="fixed">
+    <origin rpy="0.0 0.0 0" xyz="0.00 0.0 ${0.017}"/>
+    <axis xyz="0 0 1"/>
+    <parent link="${prefix}ft_sensor_link"/>
+    <child link="${prefix}tool1"/>
+  </joint>
 
   </xacro:macro>
 </robot>

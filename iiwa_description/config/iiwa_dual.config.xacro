@@ -182,6 +182,41 @@
             rpy="${right_base_frame['roll']} ${right_base_frame['pitch']} ${right_base_frame['yaw']}" />
     </xacro:iiwa>
 
+   
+        <joint name="l_joint_tool1_plate" type="fixed">
+            <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+            <parent link="l_tool1"/>
+             <child link="l_plate_link"/>
+             <axis xyz="0 0 0"/>
+         </joint>
+
+         <link name="l_ee"/>
+
+          <joint name="l_joint_gripper_ee" type="fixed">
+            <origin xyz="0.027 0 0.168" rpy="0 0.0698 0"/>
+            <parent link="l_plate_link"/>
+             <child link="l_ee"/>
+             <axis xyz="0 0 0"/>
+         </joint>
+
+           <joint name="r_joint_tool1_plate" type="fixed">
+            <origin rpy="0 0 1.5708" xyz="0 0 0"/>
+            <parent link="r_tool1"/>
+             <child link="r_plate_link"/>
+             <axis xyz="0 0 0"/>
+         </joint>
+
+         <link name="r_ee"/>
+
+          <joint name="r_joint_gripper_ee" type="fixed">
+            <origin xyz="0.027 0 0.168" rpy="0 0.0698 0"/>
+            <parent link="r_plate_link"/>
+             <child link="r_ee"/>
+             <axis xyz="0 0 0"/>
+         </joint>
+
+
+
     <xacro:iiwa_r2c_hardware
         name="iiwa_left" prefix="l_"
         robot_ip="$(arg robot_ip)" robot_port="$(arg robot_port)"

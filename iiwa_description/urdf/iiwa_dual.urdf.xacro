@@ -186,6 +186,12 @@
                     <color rgba="0.5 0.5 0.5 1.0" />
                 </material>
     </visual>
+     <collision>
+      <origin rpy="3.14159 0.0 0.0" xyz="-0.037 0.037 0.017"/>
+        <geometry>
+        <mesh filename="package://iiwa_description/meshes/ati/ati_gamma.stl" scale="1.0 1.0 1.0"/>
+        </geometry>
+    </collision>
     <!--
     <collision>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.017"/>

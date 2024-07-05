@@ -7,17 +7,17 @@
 <xacro:property name="gripper_width" value="0.1" />
 <xacro:property name="gripper_depth" value="0.01" />
   
-  <link name="${prefix}iiwa_base" type="fixed"/>
+  <link name="${prefix}base" type="fixed"/>
 
-  <joint name="${prefix}iiwa_root_joint" type="fixed">
+  <joint name="${prefix}_root_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}"/>
-      <child link="${prefix}iiwa_base"/>
+      <child link="${prefix}base"/>
   </joint>
 
-  <joint name="${prefix}iiwa_base_joint" type="fixed">
+  <joint name="${prefix}base_joint" type="fixed">
       <origin rpy="0.0 0 0" xyz="0 0 0"/>
-      <parent link="${prefix}iiwa_base"/>
+      <parent link="${prefix}base"/>
       <child link="${prefix}link_0"/>
   </joint>
 
@@ -234,49 +234,49 @@
   <link name="${prefix}tool0"/>
   <link name="${prefix}tool1"/>
 
-  <joint name="${prefix}joint_a1" type="revolute">
+  <joint name="${prefix}joint_1" type="revolute">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <parent link="${prefix}link_0"/>
       <child link="${prefix}link_1"/>
       <axis xyz="0 0 1"/>
       <limit effort="320" lower="-2.9668" upper="2.9668" velocity="1.4834"/>
   </joint>
-  <joint name="${prefix}joint_a2" type="revolute">
+  <joint name="${prefix}joint_2" type="revolute">
       <origin rpy="0 0 0" xyz="-0.00043624 0 0.36"/>
       <parent link="${prefix}link_1"/>
       <child link="${prefix}link_2"/>
       <axis xyz="0 1 0"/>
       <limit effort="320" lower="-2.0942" upper="2.0942" velocity="1.4834"/>
   </joint>
-  <joint name="${prefix}joint_a3" type="revolute">
+  <joint name="${prefix}joint_3" type="revolute">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <parent link="${prefix}link_2"/>
       <child link="${prefix}link_3"/>
       <axis xyz="0 0 1"/>
       <limit effort="176" lower="-2.9668" upper="2.9668" velocity="1.7452"/>
   </joint>
-  <joint name="${prefix}joint_a4" type="revolute">
+  <joint name="${prefix}joint_4" type="revolute">
       <origin rpy="0 0 0" xyz="0.00043624 0 0.42"/>
       <parent link="${prefix}link_3"/>
       <child link="${prefix}link_4"/>
       <axis xyz="0 -1 0"/>
       <limit effort="176" lower="-2.0942" upper="2.0942" velocity="1.3089"/>
   </joint>
-  <joint name="${prefix}joint_a5" type="revolute">
+  <joint name="${prefix}joint_5" type="revolute">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <parent link="${prefix}link_4"/>
       <child link="${prefix}link_5"/>
       <axis xyz="0 0 1"/>
       <limit effort="110" lower="-2.9668" upper="2.9668" velocity="2.2688"/>
   </joint>
-  <joint name="${prefix}joint_a6" type="revolute">
+  <joint name="${prefix}joint_6" type="revolute">
       <origin rpy="0 0 0" xyz="0 0 0.4"/>
       <parent link="${prefix}link_5"/>
       <child link="${prefix}link_6"/>
       <axis xyz="0 1 0"/>
       <limit effort="40" lower="-2.0942" upper="2.0942" velocity="2.356"/>
   </joint>
-  <joint name="${prefix}joint_a7" type="revolute">
+  <joint name="${prefix}joint_7" type="revolute">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <parent link="${prefix}link_6"/>
       <child link="${prefix}link_7"/>
@@ -286,7 +286,7 @@
 
   
 
-  <joint name="${prefix}joint_a7-tool0" type="fixed">
+  <joint name="${prefix}joint_7-tool0" type="fixed">
       <origin rpy="0 0 0" xyz="0 0 0.152"/>
       <parent link="${prefix}link_7"/>
       <child link="${prefix}tool0"/>

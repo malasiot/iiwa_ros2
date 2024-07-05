@@ -13,23 +13,23 @@
         type: FollowJointTrajectory
         default: true
         joints:
-          - l_joint_a1
-          - l_joint_a2
-          - l_joint_a3
-          - l_joint_a4
-          - l_joint_a5
-          - l_joint_a6
-          - l_joint_a7
+          - iiwa_left_joint_1
+          - iiwa_left_joint_2
+          - iiwa_left_joint_3
+          - iiwa_left_joint_4
+          - iiwa_left_joint_5
+          - iiwa_left_joint_6
+          - iiwa_left_joint_7
 
       right_arm_controller:
         action_ns: follow_joint_trajectory
         type: FollowJointTrajectory
         default: true
         joints:
-          - r_joint_a1
-          - r_joint_a2
-          - r_joint_a3
-          - r_joint_a4
-          - r_joint_a5
-          - r_joint_a6
-          - r_joint_a7
+          - iiwa_right_joint_1
+          - iiwa_right_joint_2
+          - iiwa_right_joint_3
+          - iiwa_right_joint_4
+          - iiwa_right_joint_5
+          - iiwa_right_joint_6
+          - iiwa_right_joint_7

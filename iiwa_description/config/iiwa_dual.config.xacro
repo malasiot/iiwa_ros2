@@ -8,7 +8,7 @@
     <xacro:arg name="prefix" default="" />
     <xacro:arg name="robot_ip" default="192.170.10.2" />
     <xacro:arg name="robot_port" default="30200" />
-    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+    
     <xacro:arg name="command_interface" default="position" />
     <xacro:arg name="base_frame_file" default="base_frame.yaml" />
     <xacro:arg name="description_package" default="iiwa_description" />
@@ -16,11 +16,13 @@
     <xacro:arg name="controllers_file" default="iiwa_dual_controllers.yaml" />
     <xacro:arg name="show_aruco_board" default="false" />
     <xacro:arg name="add_gripper_links" default="true" />
+    <xacro:arg name="add_virtual_camera" default="false" />
     <xacro:arg name="namespace" default="/" />
 
     <xacro:property name="description_package" value="$(arg description_package)"/>
     <xacro:property name="show_aruco_board" value="$(arg show_aruco_board)"/>
     <xacro:property name="add_gripper_links" value="$(arg add_gripper_links)"/>
+    <xacro:property name="add_virtual_camera" value="$(arg add_virtual_camera)"/>
 
     <!-- Import iiwa urdf file -->
     <xacro:include filename="$(find ${description_package})/urdf/iiwa_dual.urdf.xacro" />
@@ -74,7 +76,7 @@
  <!-- table as base for the 2 iiwa's -->
     <link name="base">
         <visual>
-            <origin xyz="-0.5 0 -0.005" rpy="0 0 0" />
+            <origin xyz="-0.6 0 -0.005" rpy="0 0 0" />
             <geometry>
                 <box size="1.5 1 0.01" />
             </geometry>
@@ -83,7 +85,7 @@
             </material>
         </visual>
         <collision>
-            <origin xyz="-0.5 0 -0.005" rpy="0 0 0" />
+            <origin xyz="-0.6 0 -0.005" rpy="0 0 0" />
             <geometry>
                 <box size="1.5 1 0.01" />
             </geometry>
@@ -95,11 +97,37 @@
         </inertial>
     </link>
 
+
+   
+  <link name="table">
+    <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0 0 0" />
+      <geometry>
+        <box size="0.75 1.2 0.001" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+    <collision>
+      <origin rpy="0.0 0.0 0.0" xyz="0 0 0" />
+      <geometry>
+        <box size="0.75 1.2 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
     <joint name="base_to_world" type="fixed">
         <parent link="world"/>
         <child link="base"/>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
     </joint>
+
+     <joint name="world_to_table" type="fixed">
+    <parent link="world" />
+    <child link="table" />
+    <origin rpy="0.0 0.0 0.0" xyz="0.6 0 -0.055" />
+  </joint>
+
+<xacro:if value="${add_virtual_camera}">
 
     <link name="camera_pole">
         <visual>
@@ -171,65 +199,66 @@
       
        <origin xyz="-0.025 0 0" rpy="-1.57 0 1.57" />
     </joint>
+</xacro:if>
 
-    <xacro:iiwa parent="base" prefix="l_" add_gripper_link="${add_gripper_links}">
+    <xacro:iiwa parent="base" prefix="iiwa_left_" add_gripper_link="${add_gripper_links}">
         <origin xyz="${left_base_frame['x']} ${left_base_frame['y']} ${left_base_frame['z']}"
             rpy="${left_base_frame['roll']} ${left_base_frame['pitch']} ${left_base_frame['yaw']}" />
     </xacro:iiwa>
+ 
     
-    <xacro:iiwa parent="base" prefix="r_" add_gripper_link="${add_gripper_links}">
+    <xacro:iiwa parent="base" prefix="iiwa_right_" add_gripper_link="${add_gripper_links}">
         <origin xyz="${right_base_frame['x']} ${right_base_frame['y']} ${right_base_frame['z']}"
             rpy="${right_base_frame['roll']} ${right_base_frame['pitch']} ${right_base_frame['yaw']}" />
     </xacro:iiwa>
 
    
-        <joint name="l_joint_tool1_plate" type="fixed">
+        <joint name="left_joint_tool1_plate" type="fixed">
             <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
-            <parent link="l_tool1"/>
-             <child link="l_plate_link"/>
+            <parent link="iiwa_left_tool1"/>
+             <child link="iiwa_left_plate_link"/>
              <axis xyz="0 0 0"/>
          </joint>
 
-         <link name="l_ee"/>
+         <link name="iiwa_left_ee"/>
 
-          <joint name="l_joint_gripper_ee" type="fixed">
-            <origin xyz="0.027 0 0.168" rpy="0 0.0698 -1.5708"/>
-            <parent link="l_plate_link"/>
-             <child link="l_ee"/>
+          <joint name="iiwa_left_joint_gripper_ee" type="fixed">
+            <origin xyz="0.027 0 0.168" rpy="${pi} ${-pi/2 + 0.0698} -1.5708"/>
+            <parent link="iiwa_left_plate_link"/>
+             <child link="iiwa_left_ee"/>
              <axis xyz="0 0 0"/>
          </joint>
 
-           <joint name="r_joint_tool1_plate" type="fixed">
+           <joint name="iiwa_right_joint_tool1_plate" type="fixed">
             <origin rpy="0 0 1.5708" xyz="0 0 0"/>
-            <parent link="r_tool1"/>
-             <child link="r_plate_link"/>
+            <parent link="iiwa_right_tool1"/>
+             <child link="iiwa_right_plate_link"/>
              <axis xyz="0 0 0"/>
          </joint>
 
-         <link name="r_ee"/>
+         <link name="iiwa_right_ee"/>
 
-          <joint name="r_joint_gripper_ee" type="fixed">
-            <origin xyz="0.027 0 0.168" rpy="0 0.0698 1.5708"/>
-            <parent link="r_plate_link"/>
-             <child link="r_ee"/>
+          <joint name="iiwa_right_joint_gripper_ee" type="fixed">
+            <origin xyz="0.027 0 0.168" rpy="${pi} ${-pi/2 + 0.0698} 1.5708"/>
+            <parent link="iiwa_right_plate_link"/>
+             <child link="iiwa_right_ee"/>
              <axis xyz="0 0 0"/>
          </joint>
-
 
 
     <xacro:iiwa_r2c_hardware
-        name="iiwa_left" prefix="l_"
+        name="iiwa_left" prefix="iiwa_left_"
         robot_ip="$(arg robot_ip)" robot_port="$(arg robot_port)"
         command_interface="$(arg command_interface)"
-        initial_positions_file="$(arg initial_positions_file)"
+        initial_positions_file="left_initial_positions.yaml"
         use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)"
         />
         
     <xacro:iiwa_r2c_hardware
-        name="iiwa_right" prefix="r_"
+        name="iiwa_right" prefix="iiwa_right_"
         robot_ip="$(arg robot_ip)" robot_port="$(arg robot_port)"
         command_interface="$(arg command_interface)"
-        initial_positions_file="$(arg initial_positions_file)"
+        initial_positions_file="right_initial_positions.yaml"
         use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)"
         />
 

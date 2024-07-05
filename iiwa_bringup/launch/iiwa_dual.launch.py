@@ -166,6 +166,14 @@ def generate_launch_description():
         )
     )
 
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'add_virtual_camera',
+            default_value='false',
+            description='Add virtual camera',
+        )
+    )
+
     # Initialize Arguments
     runtime_config_package = LaunchConfiguration('runtime_config_package')
     controllers_file = LaunchConfiguration('controllers_file')
@@ -180,12 +188,13 @@ def generate_launch_description():
     start_rviz = LaunchConfiguration('start_rviz')
     robot_ip = LaunchConfiguration('robot_ip')
     robot_port = LaunchConfiguration('robot_port')
-    initial_positions_file = LaunchConfiguration('initial_positions_file')
+    
     command_interface = LaunchConfiguration('command_interface')
     base_frame_file = LaunchConfiguration('base_frame_file')
     namespace = LaunchConfiguration('namespace')
     show_aruco_board = LaunchConfiguration("show_aruco_board")
     add_gripper_links = LaunchConfiguration("add_gripper_links")
+    add_virtual_camera = LaunchConfiguration("add_virtual_camera")
 
 
     # Get URDF via xacro
@@ -212,9 +221,6 @@ def generate_launch_description():
             'robot_port:=',
             robot_port,
             ' ',
-            'initial_positions_file:=',
-            initial_positions_file,
-            ' ',
             'command_interface:=',
             command_interface,
             ' ',
@@ -233,9 +239,13 @@ def generate_launch_description():
             'show_aruco_board:=',
             show_aruco_board,
             ' ',
-             'add_gripper_links:=',
+            'add_gripper_links:=',
             add_gripper_links,
             ' ',
+            'add_virtual_camera:=',
+            add_virtual_camera,
+            ' ',
+
             'namespace:=',
             namespace,
         ]

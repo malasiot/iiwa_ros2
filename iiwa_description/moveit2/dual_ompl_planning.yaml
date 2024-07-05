@@ -55,7 +55,7 @@
           max_nearest_neighbors: 10  # use k nearest neighbors. default: 10
         PRMstarkConfigDefault:
           type: geometric::PRMstar
-      l_iiwa_arm:
+      iiwa_left_arm:
         planner_configs:
           - SBLkConfigDefault
           - ESTkConfigDefault
@@ -68,7 +68,7 @@
           - TRRTkConfigDefault
           - PRMkConfigDefault
           - PRMstarkConfigDefault
-      r_iiwa_arm:
+      iiwa_right_arm:
         planner_configs:
           - SBLkConfigDefault
           - ESTkConfigDefault

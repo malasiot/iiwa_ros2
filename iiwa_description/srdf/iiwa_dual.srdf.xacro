@@ -19,23 +19,23 @@
   <disable_collisions link1="marker_link_0" link2="r_link_6" reason="Adjacent" />
  
     
-  <group_state name="calibration" group="r_iiwa_arm">
-        <joint name="r_joint_a1" value="-0.08010961654547082"/>
-        <joint name="r_joint_a2" value="-0.16420504552657098"/>
-        <joint name="r_joint_a3" value="-0.27250731500631165"/>
-        <joint name="r_joint_a4" value="1.8724710663682194"/>
-        <joint name="r_joint_a5" value="1.2174080270970293"/>
-        <joint name="r_joint_a6" value="1.2045682076607263"/>
-        <joint name="r_joint_a7" value="-0.11062877843161172"/>
+  <group_state name="calibration" group="iiwa_right_arm">
+        <joint name="iiwa_right_joint_1" value="-0.08010961654547082"/>
+        <joint name="iiwa_right_joint_2" value="-0.16420504552657098"/>
+        <joint name="iiwa_right_joint_3" value="-0.27250731500631165"/>
+        <joint name="iiwa_right_joint_4" value="1.8724710663682194"/>
+        <joint name="iiwa_right_joint_5" value="1.2174080270970293"/>
+        <joint name="iiwa_right_joint_6" value="1.2045682076607263"/>
+        <joint name="iiwa_right_joint_7" value="-0.11062877843161172"/>
  </group_state>
   </xacro:if>
 
-  <xacro:iiwa_srdf name="$(arg name)" prefix="l_" base="base"/>
-  <xacro:iiwa_srdf name="$(arg name)" prefix="r_" base="base"/>
+  <xacro:iiwa_srdf name="arm" prefix="iiwa_left_" base="base"/>
+  <xacro:iiwa_srdf name="arm" prefix="iiwa_right_" base="base"/>
 
   <group name="dual_arm">
-    <group name="l_iiwa_arm" />
-    <group name="r_iiwa_arm" />
+    <group name="iiwa_left_arm" />
+    <group name="iiwa_right_arm" />
   </group>
 
 

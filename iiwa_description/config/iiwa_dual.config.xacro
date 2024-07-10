@@ -223,7 +223,7 @@
          <link name="iiwa_left_ee"/>
 
           <joint name="iiwa_left_joint_gripper_ee" type="fixed">
-            <origin xyz="0.027 0 0.168" rpy="${pi} ${-pi/2 + 0.0698} -1.5708"/>
+            <origin xyz="0.027 0 0.168" rpy="${0} ${-pi/2 + 0.0698} -1.5708"/>
             <parent link="iiwa_left_plate_link"/>
              <child link="iiwa_left_ee"/>
              <axis xyz="0 0 0"/>
@@ -239,7 +239,7 @@
          <link name="iiwa_right_ee"/>
 
           <joint name="iiwa_right_joint_gripper_ee" type="fixed">
-            <origin xyz="0.027 0 0.168" rpy="${pi} ${-pi/2 + 0.0698} 1.5708"/>
+            <origin xyz="0.027 0 0.168" rpy="${0} ${-pi/2 + 0.0698} 1.5708"/>
             <parent link="iiwa_right_plate_link"/>
              <child link="iiwa_right_ee"/>
              <axis xyz="0 0 0"/>

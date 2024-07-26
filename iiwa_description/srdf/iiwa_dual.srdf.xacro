@@ -10,9 +10,9 @@
    <xacro:property name="show_aruco_board" value="$(arg show_aruco_board)"/>
    
   <xacro:include filename="$(find ${description_package})/srdf/iiwa_dual_macro.srdf.xacro"/>
-
+<!--
   <disable_collisions link1="base" link2="camera_pole" reason="Adjacent" />
-  <disable_collisions link1="camera_link" link2="camera_pole" reason="Adjacent" />
+  <disable_collisions link1="camera_link" link2="camera_pole" reason="Adjacent" /> -->
   
   <xacro:if value="${show_aruco_board}">
   <disable_collisions link1="marker_link_0" link2="r_link_7" reason="Adjacent" />

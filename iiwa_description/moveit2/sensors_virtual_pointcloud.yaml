@@ -1,4 +1,4 @@
-sensors: [virtual_camera]
+sensors: [ virtual_camera ]
 virtual_camera:
   sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
   point_cloud_topic: /masked/points

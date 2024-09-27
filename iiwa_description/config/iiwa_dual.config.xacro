@@ -161,10 +161,10 @@
 
      <joint name="iiwa_left_tactile_skin_center_joint" type="fixed">
     <parent link="iiwa_left_tactile_skin_bracket"/>
-    <child link="iiwa_left_tactile_skin_center"/>
-    <origin rpy="0 0 0" xyz="0 0.07 0"/>
+    <child link="iiwa_left_tactile_ee"/>
+    <origin rpy="0 -${pi/2} 0" xyz="0 0.07 0"/>
   </joint>
-  <link name="iiwa_left_tactile_skin_center"/>
+  <link name="iiwa_left_tactile_ee"/>
   
   <link name="iiwa_left_tactile_skin"/>
   
@@ -200,21 +200,21 @@
 
   <joint name="iiwa_right_tactile_skin_center_joint" type="fixed">
     <parent link="iiwa_right_tactile_skin_bracket"/>
-    <child link="iiwa_right_tactile_skin_center"/>
-    <origin rpy="0 0 0" xyz="0 0.07 0"/>
+    <child link="iiwa_right_tactile_ee"/>
+   <origin rpy="${pi} -${pi/2} 0" xyz="0 0.07 0"/>
   </joint>
-  <link name="iiwa_right_tactile_skin_center"/>
+  <link name="iiwa_right_tactile_ee"/>
  
   <link name="iiwa_right_tactile_skin"/>
 
- <!--
+
   <joint name="world_to_camera_213322070245_color_optical_frame" type="fixed">
     <parent link="world"/>
     <child link="camera_213322070245_color_optical_frame"/>
     <origin rpy="-2.436 -0.007 -1.575" xyz="-0.221 0.026 1.026"/>
   </joint>
   <link name="camera_213322070245_color_optical_frame"/>
--->
+
 <xacro:if value="${add_virtual_camera}">
 
     <link name="camera_pole">

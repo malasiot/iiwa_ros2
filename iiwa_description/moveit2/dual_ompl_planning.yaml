@@ -81,6 +81,32 @@
           - TRRTkConfigDefault
           - PRMkConfigDefault
           - PRMstarkConfigDefault
+      iiwa_left_arm_tactile:
+        planner_configs:
+          - SBLkConfigDefault
+          - ESTkConfigDefault
+          - LBKPIECEkConfigDefault
+          - BKPIECEkConfigDefault
+          - KPIECEkConfigDefault
+          - RRTkConfigDefault
+          - RRTConnectkConfigDefault
+          - RRTstarkConfigDefault
+          - TRRTkConfigDefault
+          - PRMkConfigDefault
+          - PRMstarkConfigDefault
+      iiwa_right_arm_tactile:
+        planner_configs:
+          - SBLkConfigDefault
+          - ESTkConfigDefault
+          - LBKPIECEkConfigDefault
+          - BKPIECEkConfigDefault
+          - KPIECEkConfigDefault
+          - RRTkConfigDefault
+          - RRTConnectkConfigDefault
+          - RRTstarkConfigDefault
+          - TRRTkConfigDefault
+          - PRMkConfigDefault
+          - PRMstarkConfigDefault
       dual_arm:
         planner_configs:
           - SBLkConfigDefault

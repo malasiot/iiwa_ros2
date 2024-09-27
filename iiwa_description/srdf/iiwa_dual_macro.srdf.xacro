@@ -9,6 +9,10 @@
         <chain base_link="${prefix}base" tip_link="${prefix}ee" />
     </group>
 
+     <group name="${prefix}${name}_tactile">
+        <chain base_link="${prefix}base" tip_link="${prefix}tactile_ee" />
+    </group>
+
     <group_state name="ready" group="${prefix}${name}">
         <joint name="${prefix}joint_1" value="0"/>
         <joint name="${prefix}joint_2" value="-0.785"/>

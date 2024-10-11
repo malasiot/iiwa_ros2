@@ -279,7 +279,7 @@ def generate_launch_description():
             robot_description_kinematics,
             planning_pipelines_config,
             ompl_planning_config,
-            {"use_sim_time": True}
+      #      {"use_sim_time": True}
         ],
         condition=IfCondition(start_rviz),
     )

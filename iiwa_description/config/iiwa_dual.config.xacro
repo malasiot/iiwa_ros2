@@ -353,16 +353,11 @@
 
     <xacro:iiwa_gazebo
         runtime_config_package="$(arg runtime_config_package)"
-        controllers_file="iiwa_controllers.yaml"
+        controllers_file="iiwa_dual_controllers.yaml"
         namespace="$(arg namespace)"
-        prefix="l_"
+        prefix=""
         />
         
-        <xacro:iiwa_gazebo
-        runtime_config_package="$(arg runtime_config_package)"
-        controllers_file="iiwa_controllers.yaml"
-        namespace="$(arg namespace)"
-        prefix="r_"
-        />
+      
 
 </robot>

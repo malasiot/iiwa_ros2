@@ -8,12 +8,16 @@ Panels:
         - /Status1
         - /RobotModel1
         - /MotionPlanning1
+        - /MotionPlanning1/Scene Geometry1
         - /MotionPlanning1/Scene Robot1
         - /Camera1
         - /Camera1/Visibility1
         - /Camera1/Topic1
+        - /RobotState1
+        - /RobotState1/Status1
         - /MarkerArray1
         - /PointCloud21
+        - /MarkerArray2
       Splitter Ratio: 0.5
     Tree Height: 259
   - Class: rviz_common/Selection
@@ -93,7 +97,7 @@ Visualization Manager:
     - Acceleration_Scaling_Factor: 0.1
       Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
-      Move Group Namespace: ""
+      Move Group Namespace: gp
       MoveIt_Allow_Approximate_IK: false
       MoveIt_Allow_External_Program: false
       MoveIt_Allow_Replanning: false
@@ -126,6 +130,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          camera_213322070245_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           iiwa_left_base:
             Alpha: 1
             Show Axes: false
@@ -180,6 +188,19 @@ Visualization Manager:
             Show Trail: false
             Value: true
           iiwa_left_plate_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          iiwa_left_tactile_ee:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          iiwa_left_tactile_skin:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          iiwa_left_tactile_skin_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -246,6 +267,19 @@ Visualization Manager:
             Show Trail: false
             Value: true
           iiwa_right_plate_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          iiwa_right_tactile_ee:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          iiwa_right_tactile_skin:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          iiwa_right_tactile_skin_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -296,7 +330,7 @@ Visualization Manager:
         Show Workspace: false
         Start State Alpha: 1
         Start State Color: 0; 255; 0
-      Planning Scene Topic: /monitored_planning_scene
+      Planning Scene Topic: /gp/monitored_planning_scene
       Robot Description: robot_description
       Scene Geometry:
         Scene Alpha: 0.8999999761581421
@@ -318,6 +352,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          camera_213322070245_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           iiwa_left_base:
             Alpha: 1
             Show Axes: false
@@ -372,6 +410,19 @@ Visualization Manager:
             Show Trail: false
             Value: true
           iiwa_left_plate_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          iiwa_left_tactile_ee:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          iiwa_left_tactile_skin:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          iiwa_left_tactile_skin_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -438,6 +489,19 @@ Visualization Manager:
             Show Trail: false
             Value: true
           iiwa_right_plate_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          iiwa_right_tactile_ee:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          iiwa_right_tactile_skin:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          iiwa_right_tactile_skin_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -502,6 +566,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_213322070245_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         iiwa_left_base:
           Alpha: 1
           Show Axes: false
@@ -556,6 +624,19 @@ Visualization Manager:
           Show Trail: false
           Value: true
         iiwa_left_plate_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        iiwa_left_tactile_ee:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        iiwa_left_tactile_skin:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        iiwa_left_tactile_skin_bracket:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -626,6 +707,19 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        iiwa_right_tactile_ee:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        iiwa_right_tactile_skin:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        iiwa_right_tactile_skin_bracket:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         iiwa_right_tool0:
           Alpha: 1
           Show Axes: false
@@ -646,7 +740,7 @@ Visualization Manager:
       Name: RobotState
       Robot Alpha: 1
       Robot Description: robot_description
-      Robot State Topic: display_robot_state
+      Robot State Topic: /gp/display_robot_state
       Show All Links: true
       Show Highlights: true
       Value: true
@@ -655,16 +749,14 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        candidates:graspbox: true
         candidates:graspnet: true
-        filtered:graspbox: true
-        filtered:graspnet: true
+        filtered: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /visual_grasps
+        Value: /gp/visual_grasps
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
@@ -710,7 +802,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /visual_boxes
+        Value: /gp/visual_boxes
       Value: true
   Enabled: true
   Global Options:
@@ -758,7 +850,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 3.6871774196624756
+      Distance: 2.4659841060638428
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -773,10 +865,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6603977680206299
+      Pitch: 0.2797963321208954
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.430403232574463
+      Yaw: 0.9054015278816223
     Saved: ~
 Window Geometry:
   Camera:

@@ -358,28 +358,32 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['joint_state_broadcaster', '--controller-manager',
-                   [namespace, 'controller_manager']],
+        namespace=namespace,
+        arguments=['joint_state_broadcaster', 
+                   '--controller-manager', 'controller_manager'],
     )
 
     external_torque_broadcaster_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['ets_state_broadcaster', '--controller-manager',
-                   [namespace, 'controller_manager']],
+        namespace=namespace,
+        arguments=['ets_state_broadcaster', 
+                   '--controller-manager', 'controller_manager'],
         condition=UnlessCondition(use_sim),
     )
 
     left_robot_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=["left_arm_controller", '--controller-manager', [namespace, 'controller_manager']],
+        arguments=["left_arm_controller", 
+                   '--controller-manager', [namespace, 'controller_manager']],
     )
 
     right_robot_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=["right_arm_controller", '--controller-manager', [namespace, 'controller_manager']],
+        arguments=["right_arm_controller", 
+                   '--controller-manager', [namespace, 'controller_manager']],
     )
 
     # Delay `joint_state_broadcaster` after spawn_entity

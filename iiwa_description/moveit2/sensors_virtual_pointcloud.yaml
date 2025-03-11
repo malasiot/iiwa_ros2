@@ -1,11 +1,11 @@
 sensors: [ virtual_camera ]
 virtual_camera:
   sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
-  point_cloud_topic: /masked/points
+  point_cloud_topic: /gp/masked/points
   max_range: 3.0
   point_subsample: 1
   padding_offset: 0.01
   padding_scale: 1.0
   max_update_rate: 1.0
-  filtered_cloud_topic: filtered
+  filtered_cloud_topic: /gp/filtered
     

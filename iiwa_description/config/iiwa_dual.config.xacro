@@ -211,7 +211,7 @@
   <joint name="world_to_camera_213322070245_color_optical_frame" type="fixed">
     <parent link="world"/>
     <child link="camera_213322070245_color_optical_frame"/>
-    <origin rpy="-2.436 -0.007 -1.575" xyz="-0.221 0.026 1.026"/>
+    <origin rpy="-2.424 0.013 -1.605" xyz="-0.261 0.010 1.031"/>
   </joint>
   <link name="camera_213322070245_color_optical_frame"/>
 
@@ -302,7 +302,7 @@
 
    
         <joint name="left_joint_tool1_plate" type="fixed">
-            <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+            <origin rpy="0 0 -0.785398" xyz="0 0 0"/>
             <parent link="iiwa_left_tool1"/>
              <child link="iiwa_left_plate_link"/>
              <axis xyz="0 0 0"/>
@@ -318,7 +318,7 @@
          </joint>
 
            <joint name="iiwa_right_joint_tool1_plate" type="fixed">
-            <origin rpy="0 0 1.5708" xyz="0 0 0"/>
+            <origin rpy="0 0 -0.785398" xyz="0 0 0"/>
             <parent link="iiwa_right_tool1"/>
              <child link="iiwa_right_plate_link"/>
              <axis xyz="0 0 0"/>
